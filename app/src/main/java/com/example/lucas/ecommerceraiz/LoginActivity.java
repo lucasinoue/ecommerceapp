@@ -1,5 +1,6 @@
 package com.example.lucas.ecommerceraiz;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -31,7 +32,7 @@ public class LoginActivity extends AppCompatActivity {
         boolean loginOK;
         boolean passOK;
 
-
+        Intent intent;
         for(Usuario user : listaUsers){
 
             loginOK = validaUsuario(user);
@@ -39,6 +40,8 @@ public class LoginActivity extends AppCompatActivity {
 
             if (loginOK && passOK) {
                 Toast.makeText(this, "OPa deu boa", Toast.LENGTH_LONG).show();
+                intent = new Intent(this,CadastroCliente.class);
+                startActivity(intent);
             }
             else {
                 Toast.makeText(this, "Usuário ou senha incorretos", Toast.LENGTH_LONG).show();
