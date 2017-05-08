@@ -3,6 +3,7 @@ package com.example.lucas.ecommerceraiz;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -19,7 +20,8 @@ public class Menu extends Activity {
     ListView listViewProdutos;
     Intent intent;
     ArrayAdapter <Produto> arrayAdapter;
-    ArrayList<Produto> produto;
+
+    Parcelable[] parcelables;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,9 +29,11 @@ public class Menu extends Activity {
         listViewProdutos = (ListView)findViewById(R.id.LVProdutos);
         intent = getIntent();
 
-        produto = intent.getParcelableArrayExtra("PRODUTOS");//aqui eu n entendi mas amanha investigo
+        ArrayList<Produto>  produto =  getIntent().getParcelableArrayListExtra("PRODUTOS");
 
         arrayAdapter = new ArrayAdapter<Produto>(this, android.R.layout.simple_list_item_1, produto);
 
+        listViewProdutos.setAdapter(arrayAdapter);
+        arrayAdapter.setNotifyOnChange(true);
 }
 }
