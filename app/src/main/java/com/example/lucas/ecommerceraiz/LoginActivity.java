@@ -40,7 +40,7 @@ public class LoginActivity extends AppCompatActivity {
 
             if (loginOK && passOK) {
                 Toast.makeText(this, "OPa deu boa", Toast.LENGTH_LONG).show();
-                intent = new Intent(this,CadastroCliente.class);
+                intent = new Intent(this,Menu.class);
                 startActivity(intent);
             }
             else {
