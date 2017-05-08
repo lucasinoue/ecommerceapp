@@ -34,6 +34,6 @@ public class Menu extends Activity {
         arrayAdapter = new ArrayAdapter<Produto>(this, android.R.layout.simple_list_item_1, produto);
 
         listViewProdutos.setAdapter(arrayAdapter);
-        arrayAdapter.setNotifyOnChange(true);
+      //  arrayAdapter.setNotifyOnChange(true);
 }
 }
