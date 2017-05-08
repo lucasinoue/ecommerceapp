@@ -37,7 +37,6 @@
         android:layout_alignStart="@+id/etPassword"
         android:layout_below="@+id/etPassword"
         android:layout_marginTop="18dp"
-        android:onClick="doLogin"
         android:text="Entrar" />
 
 </RelativeLayout>

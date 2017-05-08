@@ -26,34 +26,36 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    public void doLogin(View v) {
-        login = (EditText) findViewById(R.id.etLogin);
-        senha = (EditText) findViewById(R.id.etPassword);
-        boolean loginOK;
-        boolean passOK;
+    private View.OnClickListener doLogin = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            login = (EditText) findViewById(R.id.etLogin);
+            senha = (EditText) findViewById(R.id.etPassword);
+            boolean loginOK;
+            boolean passOK;
 
-        Intent intent;
-        for(Usuario user : listaUsers){
+            Intent intent;
+            for(Usuario user : listaUsers){
 
-            loginOK = validaUsuario(user);
-            passOK = validaSenha(user);
+                loginOK = validaUsuario(user);
+                passOK = validaSenha(user);
 
-            if (loginOK && passOK) {
-                Toast.makeText(this, "OPa deu boa", Toast.LENGTH_LONG).show();
-                intent = new Intent(this,Menu.class);
-                startActivity(intent);
+                if (loginOK && passOK) {
+                    Toast.makeText(getApplicationContext(), "OPa deu boa", Toast.LENGTH_LONG).show();
+                    intent = new Intent(this,Menu.class);
+                    startActivity(intent);
+                }
+                else {
+                    Toast.makeText(getApplicationContext(), "Usuário ou senha incorretos", Toast.LENGTH_LONG).show();
+                    intent = new Intent(getApplicationContext(),CadastroCliente.class);
+                    startActivity(intent);
+                }
+
+
             }
-            else {
-                Toast.makeText(this, "Usuário ou senha incorretos", Toast.LENGTH_LONG).show();
-                intent = new Intent(this,CadastroCliente.class);
-                startActivity(intent);
-            }
-
-
         }
+    };
 
-
-    }
 
     private void initializeArrayUsers() {
         Usuario admin = new Usuario("admin", "12345");
