@@ -48,6 +48,7 @@ public class CadastroProduto extends Activity{
         arrayProduto.add(new Produto("DUMONT", "SLIM", 389.35, "joao"));
 
 
+        arrayProduto =  getIntent().getParcelableArrayListExtra("FORNECEDORES");
 
 
 
