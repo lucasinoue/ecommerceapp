@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -16,13 +17,17 @@ public class LoginActivity extends AppCompatActivity {
     private EditText login;
     private EditText senha;
     private ArrayList<Usuario> listaUsers;
+    Button btLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        btLogin = (Button) findViewById(R.id.btnLogin);
+        btLogin.setOnClickListener(doLogin);
         listaUsers = new ArrayList<Usuario>();
         initializeArrayUsers();
+
 
     }
 
