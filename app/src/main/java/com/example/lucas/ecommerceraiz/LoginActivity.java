@@ -1,5 +1,6 @@
 package com.example.lucas.ecommerceraiz;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,8 +18,9 @@ public class LoginActivity extends AppCompatActivity {
     private EditText login;
     private EditText senha;
     private ArrayList<Usuario> listaUsers;
+    Intent intent;
     Button btLogin;
-
+    Context context;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +29,7 @@ public class LoginActivity extends AppCompatActivity {
         btLogin.setOnClickListener(doLogin);
         listaUsers = new ArrayList<Usuario>();
         initializeArrayUsers();
+        context = this;
 
 
     }
@@ -47,12 +50,12 @@ public class LoginActivity extends AppCompatActivity {
 
                 if (loginOK && passOK) {
                     Toast.makeText(getApplicationContext(), "OPa deu boa", Toast.LENGTH_LONG).show();
-                    intent = new Intent(getApplication(),Menu.class);
+                    intent = new Intent(getApplicationContext(), com.example.lucas.ecommerceraiz.CadastroProduto.class);
+
                     startActivity(intent);
-                }
-                else {
+                }else {
                     Toast.makeText(getApplicationContext(), "Usuário ou senha incorretos", Toast.LENGTH_LONG).show();
-                    intent = new Intent(getApplicationContext(),CadastroCliente.class);
+                    intent = new Intent(getApplicationContext(), CadastroCliente.class);
                     startActivity(intent);
                 }
 

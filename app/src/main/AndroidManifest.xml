@@ -15,7 +15,12 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
+        <activity android:name=".Menu"></activity>
+        <activity android:name=".CadastroCliente"></activity>
+        <activity android:name=".CadastroFornecedor"></activity>
+        <activity android:name=".CadastroProduto"></activity>
     </application>
 
 </manifest>

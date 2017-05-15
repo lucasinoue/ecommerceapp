@@ -7,6 +7,7 @@ import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.lucas.ecommerceraiz.com.example.lucas.ecommerceraiz.entities.Produto;
 
@@ -16,7 +17,7 @@ import java.util.ArrayList;
  * Created by Sidimar on 06/05/2017.
  */
 
-public class Menu extends Activity {
+public class Menu extends Activity{
     ListView listViewProdutos;
     Intent intent;
     ArrayAdapter <Produto> arrayAdapter;
@@ -27,13 +28,18 @@ public class Menu extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_activity);
         listViewProdutos = (ListView)findViewById(R.id.LVProdutos);
+
         intent = getIntent();
+        if (intent.hasExtra("PRODUTOS")) {
 
-        ArrayList<Produto>  produto =  getIntent().getParcelableArrayListExtra("PRODUTOS");
+            ArrayList<Produto> produto = getIntent().getParcelableArrayListExtra("PRODUTOS");
+            arrayAdapter = new ArrayAdapter<Produto>(this, android.R.layout.simple_list_item_1, produto);
+            listViewProdutos.setAdapter(arrayAdapter);
 
-        arrayAdapter = new ArrayAdapter<Produto>(this, android.R.layout.simple_list_item_1, produto);
-
-        listViewProdutos.setAdapter(arrayAdapter);
+            }else {
+            Toast.makeText(this, "Nao há produtos cadastrados", Toast.LENGTH_LONG);
+            startActivity(new Intent(this, CadastroProduto.class));
+        }
       //  arrayAdapter.setNotifyOnChange(true);
 }
 }
