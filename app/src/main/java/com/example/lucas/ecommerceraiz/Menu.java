@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -21,14 +23,26 @@ public class Menu extends Activity{
     ListView listViewProdutos;
     Intent intent;
     ArrayAdapter <Produto> arrayAdapter;
+    Button btNovoCliente;
+    Button btNovoFornecedor;
+    Button btNovoProduto;
 
     Parcelable[] parcelables;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_activity);
-        listViewProdutos = (ListView)findViewById(R.id.LVProdutos);
 
+        btNovoFornecedor = (Button) findViewById(R.id.btnNovoFornecedor);
+        btNovoProduto = (Button) findViewById(R.id.btnNovoProduto);
+        btNovoCliente = (Button) findViewById(R.id.btnNovoCliente);
+
+        btNovoFornecedor.setOnClickListener(novoFornecedor);
+        btNovoProduto.setOnClickListener(novoProduto);
+        btNovoCliente.setOnClickListener(novoCliente);
+
+
+        listViewProdutos = (ListView)findViewById(R.id.LVProdutos);
         intent = getIntent();
         if (intent.hasExtra("PRODUTOS")) {
 
@@ -41,5 +55,35 @@ public class Menu extends Activity{
             startActivity(new Intent(this, CadastroProduto.class));
         }
       //  arrayAdapter.setNotifyOnChange(true);
+
+
 }
+
+    View.OnClickListener novoFornecedor = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            intent = new Intent(getApplicationContext(), com.example.lucas.ecommerceraiz.CadastroProduto.class);
+            startActivity(intent);
+            finish();
+        }
+    };
+    View.OnClickListener novoProduto = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            intent = new Intent(getApplicationContext(), com.example.lucas.ecommerceraiz.CadastroProduto.class);
+            startActivity(intent);
+            finish();
+        }
+    };
+
+    View.OnClickListener novoCliente = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            intent = new Intent(getApplicationContext(), com.example.lucas.ecommerceraiz.CadastroCliente.class);
+            startActivity(intent);
+            finish();
+        }
+    };
+
+
 }

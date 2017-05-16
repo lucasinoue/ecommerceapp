@@ -49,10 +49,15 @@ public class LoginActivity extends AppCompatActivity {
                 passOK = validaSenha(user);
 
                 if (loginOK && passOK) {
-                    Toast.makeText(getApplicationContext(), "OPa deu boa", Toast.LENGTH_LONG).show();
-                    intent = new Intent(getApplicationContext(), com.example.lucas.ecommerceraiz.CadastroProduto.class);
+                    if (user.getUsuario().contains("admin")) {
+                        Toast.makeText(getApplicationContext(), "OPa deu boa", Toast.LENGTH_LONG).show();
+                        intent = new Intent(getApplicationContext(), com.example.lucas.ecommerceraiz.Menu.class);
 
-                    startActivity(intent);
+                        startActivity(intent);
+                    }else {
+                        intent = new Intent(getApplicationContext(), CadastroCliente.class);
+                    }
+                    break;
                 }else {
                     Toast.makeText(getApplicationContext(), "Usuário ou senha incorretos", Toast.LENGTH_LONG).show();
                     intent = new Intent(getApplicationContext(), CadastroCliente.class);

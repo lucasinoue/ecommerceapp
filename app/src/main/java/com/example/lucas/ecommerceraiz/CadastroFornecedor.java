@@ -37,6 +37,9 @@ public class CadastroFornecedor extends Activity {
         eTResponsavel = (EditText) findViewById(R.id.edtCadResponsavel);
         eTCNPJ = (EditText) findViewById(R.id.edtCadCNPJ);
 
+        arrayFornecedor.add(new Fornecedor("Tecnos","jose","12345678911"));
+        arrayFornecedor.add(new Fornecedor("DUMA", "juka", "12345678910"));
+
 
 
 
@@ -46,7 +49,7 @@ public class CadastroFornecedor extends Activity {
     private View.OnClickListener cadastrarForncedor = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            arrayFornecedor.add(new Fornecedor(eTRasaoSocial.getText().toString(),eTResponsavel.getText().toString(),Double.parseDouble(eTCNPJ.getText().toString())));
+            arrayFornecedor.add(new Fornecedor(eTRasaoSocial.getText().toString(),eTResponsavel.getText().toString(),(eTCNPJ.getText().toString())));
             intent= new Intent(getApplicationContext(), CadastroProduto.class);
             intent.putParcelableArrayListExtra("FORNECEDORES", arrayFornecedor);
             startActivity(intent);

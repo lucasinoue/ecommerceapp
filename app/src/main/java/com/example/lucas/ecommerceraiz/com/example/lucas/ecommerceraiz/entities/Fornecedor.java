@@ -10,9 +10,9 @@ import android.os.Parcelable;
 public class Fornecedor implements Parcelable {
         private String rasaoSocial;
         private String responsavel;
-        private double CNPJ;
+        private String CNPJ;
 
-    public Fornecedor(String rasaoSocial, String responsavel, double CNPJ){
+    public Fornecedor(String rasaoSocial, String responsavel, String CNPJ){
         this.setRasaoSocial(rasaoSocial);
         this.setResponsavel(responsavel);
         this.setCNPJ(CNPJ);
@@ -21,7 +21,7 @@ public class Fornecedor implements Parcelable {
     public Fornecedor (Parcel in){
         setRasaoSocial(in.readString());
         setResponsavel(in.readString());
-        setCNPJ(in.readDouble());
+        setCNPJ(in.readString());
     }
 
     public static final Creator<Fornecedor> CREATOR = new Creator<Fornecedor>() {
@@ -44,7 +44,7 @@ public class Fornecedor implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(getRasaoSocial());
         dest.writeString(getResponsavel());
-        dest.writeDouble(getCNPJ());
+        dest.writeString(getCNPJ());
     }
 
     public String getRasaoSocial() {
@@ -63,11 +63,11 @@ public class Fornecedor implements Parcelable {
         this.responsavel = responsavel;
     }
 
-    public double getCNPJ() {
+    public String getCNPJ() {
         return CNPJ;
     }
 
-    public void setCNPJ(double CNPJ) {
+    public void setCNPJ(String CNPJ) {
         this.CNPJ = CNPJ;
     }
 }
