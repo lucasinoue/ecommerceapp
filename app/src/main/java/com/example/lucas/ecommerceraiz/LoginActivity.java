@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -31,7 +32,6 @@ public class LoginActivity extends AppCompatActivity {
         initializeArrayUsers();
         context = this;
 
-
     }
 
     private View.OnClickListener doLogin = new View.OnClickListener() {
@@ -44,7 +44,7 @@ public class LoginActivity extends AppCompatActivity {
 
             Intent intent;
             for(Usuario user : listaUsers){
-
+                Log.d("usuario", user.toString());
                 loginOK = validaUsuario(user);
                 passOK = validaSenha(user);
 
@@ -52,21 +52,23 @@ public class LoginActivity extends AppCompatActivity {
                     if (user.getUsuario().contains("admin")) {
                         Toast.makeText(getApplicationContext(), "OPa deu boa", Toast.LENGTH_LONG).show();
                         intent = new Intent(getApplicationContext(), com.example.lucas.ecommerceraiz.Menu.class);
-
                         startActivity(intent);
+                        finish();
+
                     }else {
                         intent = new Intent(getApplicationContext(), CadastroCliente.class);
+                        finish();
                     }
                     break;
                 }else {
-                    Toast.makeText(getApplicationContext(), "Usuário ou senha incorretos", Toast.LENGTH_LONG).show();
-                    intent = new Intent(getApplicationContext(), CadastroCliente.class);
-                    startActivity(intent);
+                    Toast.makeText(getApplicationContext(), "Usuário ou senha incorretos", Toast.LENGTH_SHORT).show();
                 }
 
 
             }
         }
+
+
     };
 
 

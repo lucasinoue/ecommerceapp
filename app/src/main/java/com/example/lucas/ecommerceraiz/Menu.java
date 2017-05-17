@@ -43,17 +43,17 @@ public class Menu extends Activity{
 
 
         listViewProdutos = (ListView)findViewById(R.id.LVProdutos);
-        intent = getIntent();
-        if (intent.hasExtra("PRODUTOS")) {
-
-            ArrayList<Produto> produto = getIntent().getParcelableArrayListExtra("PRODUTOS");
-            arrayAdapter = new ArrayAdapter<Produto>(this, android.R.layout.simple_list_item_1, produto);
-            listViewProdutos.setAdapter(arrayAdapter);
-
-            }else {
-            Toast.makeText(this, "Nao há produtos cadastrados", Toast.LENGTH_LONG);
-            startActivity(new Intent(this, CadastroProduto.class));
-        }
+//        intent = getIntent();
+//        if (intent.hasExtra("PRODUTOS")) {
+//
+//            ArrayList<Produto> produto = getIntent().getParcelableArrayListExtra("PRODUTOS");
+//            arrayAdapter = new ArrayAdapter<Produto>(this, android.R.layout.simple_list_item_1, produto);
+//            listViewProdutos.setAdapter(arrayAdapter);
+//
+//            }else {
+//            Toast.makeText(this, "Nao há produtos cadastrados", Toast.LENGTH_LONG);
+//            startActivity(new Intent(this, CadastroProduto.class));
+//        }
       //  arrayAdapter.setNotifyOnChange(true);
 
 
@@ -64,7 +64,6 @@ public class Menu extends Activity{
         public void onClick(View v) {
             intent = new Intent(getApplicationContext(), com.example.lucas.ecommerceraiz.CadastroProduto.class);
             startActivity(intent);
-            finish();
         }
     };
     View.OnClickListener novoProduto = new View.OnClickListener() {
@@ -72,7 +71,6 @@ public class Menu extends Activity{
         public void onClick(View v) {
             intent = new Intent(getApplicationContext(), com.example.lucas.ecommerceraiz.CadastroProduto.class);
             startActivity(intent);
-            finish();
         }
     };
 
@@ -81,7 +79,6 @@ public class Menu extends Activity{
         public void onClick(View v) {
             intent = new Intent(getApplicationContext(), com.example.lucas.ecommerceraiz.CadastroCliente.class);
             startActivity(intent);
-            finish();
         }
     };
 
