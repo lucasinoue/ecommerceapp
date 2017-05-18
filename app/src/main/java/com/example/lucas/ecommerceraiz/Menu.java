@@ -69,7 +69,7 @@ public class Menu extends Activity{
     View.OnClickListener novoFornecedor = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            intent = new Intent(getApplicationContext(), com.example.lucas.ecommerceraiz.CadastroProduto.class);
+            intent = new Intent(getApplicationContext(), com.example.lucas.ecommerceraiz.CadastroFornecedor.class);
             startActivity(intent);
         }
     };
@@ -98,7 +98,7 @@ public class Menu extends Activity{
 
 
     public void viewPdf() {
-        String filepath = getResources().openRawResource(R.raw.aplicativos).;
+        String filepath = getResources().openRawResource(R.raw.aplicativos).toString();
         File file = new File(filepath);
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setDataAndType(Uri.fromFile(file), "application/pdf");
