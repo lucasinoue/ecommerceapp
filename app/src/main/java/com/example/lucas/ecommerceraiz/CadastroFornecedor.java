@@ -1,12 +1,15 @@
 package com.example.lucas.ecommerceraiz;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.lucas.ecommerceraiz.com.example.lucas.ecommerceraiz.entities.Fornecedor;
 
@@ -21,7 +24,7 @@ public class CadastroFornecedor extends Activity {
     ArrayList<Fornecedor> arrayFornecedor;
     Fornecedor fornecedores;
     Intent intent;
-
+    SQLiteDatabase db;
     Button confirmar;
     EditText eTRasaoSocial;
     EditText eTResponsavel;
@@ -37,8 +40,9 @@ public class CadastroFornecedor extends Activity {
         eTResponsavel = (EditText) findViewById(R.id.edtCadResponsavel);
         eTCNPJ = (EditText) findViewById(R.id.edtCadCNPJ);
 
-        arrayFornecedor.add(new Fornecedor("Tecnos","jose","12345678911"));
-        arrayFornecedor.add(new Fornecedor("DUMA", "juka", "12345678910"));
+        Banco banco = new Banco(this);
+        db = banco.getWritableDatabase();
+
 
 
 
@@ -49,10 +53,23 @@ public class CadastroFornecedor extends Activity {
     private View.OnClickListener cadastrarForncedor = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            arrayFornecedor.add(new Fornecedor(eTRasaoSocial.getText().toString(),eTResponsavel.getText().toString(),(eTCNPJ.getText().toString())));
+
+            ContentValues values = new ContentValues();
+            values.put(Banco.TBFornecedor.RASAOSOCIAL, eTRasaoSocial.getText().toString());
+            values.put(Banco.TBFornecedor.RASAOSOCIAL, eTResponsavel.getText().toString());
+            values.put(Banco.TBFornecedor.CNPJ, eTCNPJ.getText().toString());
+
+            long idFornecedor = db.insert(Banco.TBFornecedor.TABLE,null,values);
+            if(!String.valueOf(idFornecedor).isEmpty()){
+                Toast.makeText(getApplicationContext(), "cadFornecedor deu boa", Toast.LENGTH_LONG).show();
+
+            }else{
+                Toast.makeText(getApplicationContext(), "cadFornecedor algo deu errado", Toast.LENGTH_LONG).show();
+            }
+            /*arrayFornecedor.add(new Fornecedor(eTRasaoSocial.getText().toString(),eTResponsavel.getText().toString(),(eTCNPJ.getText().toString())));
             intent= new Intent(getApplicationContext(), CadastroProduto.class);
             intent.putParcelableArrayListExtra("FORNECEDORES", arrayFornecedor);
-            startActivity(intent);
+            startActivity(intent);*/
         }
     };
 }
