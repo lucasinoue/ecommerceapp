@@ -1,7 +1,10 @@
 package com.example.lucas.ecommerceraiz;
 
 import android.app.Activity;
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -51,10 +54,10 @@ public class CadastroCliente extends Activity{
 
       //  arrayList.add(cliente);
 
-        arrayAdapter = new ArrayAdapter<Cliente>(this, android.R.layout.simple_list_item_1, arrayList);
+      /*  arrayAdapter = new ArrayAdapter<Cliente>(this, android.R.layout.simple_list_item_1, arrayList);
         clientes.setAdapter(arrayAdapter);
 
-
+*/
         btCadastrarCliente.setOnClickListener(cadastrarCliente);
 
     }
@@ -71,6 +74,13 @@ public class CadastroCliente extends Activity{
             long idCliente = db.insert(Banco.TBCliente.TABLE,null,values);
             if(!String.valueOf(idCliente).isEmpty()){
                 Toast.makeText(getApplicationContext(), "cadCliente deu boa", Toast.LENGTH_LONG).show();
+                Notification.Builder noBuilder = new Notification.Builder(getApplicationContext())
+                        .setDefaults(Notification.DEFAULT_ALL)
+                        .setContentTitle("Banco")
+                        .setContentText("deuBoa");
+            NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                notificationManager.notify(1,noBuilder.build());
+
 
             }else{
                 Toast.makeText(getApplicationContext(), "cadCliente algo deu errado", Toast.LENGTH_LONG).show();

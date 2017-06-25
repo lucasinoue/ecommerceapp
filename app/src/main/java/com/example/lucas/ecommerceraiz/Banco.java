@@ -11,7 +11,7 @@ import android.provider.BaseColumns;
 
 public class Banco extends SQLiteOpenHelper {
 
-    public static final String BANCO = "db_aula";
+    public static final String BANCO = "db_ecommerce";
     public static final int VERSAO = 1;
 
     public static abstract class TBCliente implements BaseColumns{
@@ -49,32 +49,32 @@ public class Banco extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         StringBuilder builder = new StringBuilder();
         //cliente
-        String sql = builder.append("CREATE TABLE" + TBCliente.TABLE)
+        String sql = builder.append(" CREATE TABLE " + TBCliente.TABLE)
                 .append("(")
-                .append(TBCliente._ID + "INTEGER PRIMARY KEY")
-                .append(TBCliente.NOME + "TEXT NOT NULL")
-                .append(TBCliente.EMAIL + "TEXT NOT NULL")
-                .append(TBCliente.SENHA + "TEXT NOT NULL")
-                .append(") ")
+                .append(TBCliente._ID + " INTEGER PRIMARY KEY,")
+                .append(TBCliente.NOME + " TEXT NOT NULL,")
+                .append(TBCliente.EMAIL + " TEXT NOT NULL,")
+                .append(TBCliente.SENHA + " TEXT NOT NULL")
+                .append(");")
 
         //fornecedor
-            .append("CREATE TABLE" + TBFornecedor.TABLE)
+            .append(" CREATE TABLE " + TBFornecedor.TABLE)
                 .append("(")
-                .append(TBFornecedor._ID + "INTEGER PRIMARY KEY")
-                .append(TBFornecedor.RASAOSOCIAL + "TEXT NOT NULL")
-                .append(TBFornecedor.CNPJ + "TEXT NOT NULL")
-                .append(TBFornecedor.RESPONSAVEL + "TEXT NOT NULL")
-                .append(") ")
+                .append(TBFornecedor._ID + " INTEGER PRIMARY KEY,")
+                .append(TBFornecedor.RASAOSOCIAL + " TEXT NOT NULL,")
+                .append(TBFornecedor.CNPJ + " TEXT NOT NULL,")
+                .append(TBFornecedor.RESPONSAVEL + " TEXT NOT NULL")
+                .append("); ")
 
         //produto
-            .append("CREATE TABLE" + TBProduto.TABLE)
+            .append(" CREATE TABLE " + TBProduto.TABLE)
                 .append("(")
-                .append(TBProduto._ID + "INTEGER PRIMARY KEY")
-                .append(TBProduto.MARCA + "TEXT NOT NULL")
-                .append(TBProduto.MODELO + "TEXT NOT NULL")
-                .append(TBProduto.VALOR + "TEXT NOT NULL")
-                .append("FOREIGN KEY ("+TBProduto.ID_FORNECEDOR+") REFERENCES"+TBFornecedor.TABLE+"("+TBFornecedor._ID+"),")
-                .append(")").toString();
+                .append(TBProduto._ID + " INTEGER PRIMARY KEY, ")
+                .append(TBProduto.MARCA + " TEXT NOT NULL,")
+                .append(TBProduto.MODELO + " TEXT NOT NULL,")
+                .append(TBProduto.VALOR + " TEXT NOT NULL,")
+                .append("FOREIGN KEY ("+TBProduto.ID_FORNECEDOR+") REFERENCES "+TBFornecedor.TABLE+"("+TBFornecedor._ID+")")
+                .append(");").toString();
         db.execSQL(sql);
 
     }
