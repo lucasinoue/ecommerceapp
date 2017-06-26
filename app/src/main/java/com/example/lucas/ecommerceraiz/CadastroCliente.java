@@ -31,6 +31,7 @@ public class CadastroCliente extends Activity{
     protected EditText edSenhaCliente;
 
     protected Button btCadastrarCliente;
+    protected Button btCancelarCadastroCliente;
     protected Button btLogin;
     protected SQLiteDatabase db;
     protected ListView clientes;
@@ -48,6 +49,7 @@ public class CadastroCliente extends Activity{
         edSenhaCliente = (EditText) findViewById(R.id.edtSenhaCliente);
 
         btCadastrarCliente = (Button) findViewById(R.id.btnCadCliente);
+        btCancelarCadastroCliente = (Button) findViewById(R.id.btnCancelCadCliente);
         btLogin = (Button) findViewById(R.id.btnLogin);
         banco = new Banco(this);
         db = banco.getWritableDatabase();
@@ -62,7 +64,7 @@ public class CadastroCliente extends Activity{
 
 */
         btCadastrarCliente.setOnClickListener(cadastrarCliente);
-
+        btCancelarCadastroCliente.setOnClickListener(cancelarCliente);
 
     }
 
@@ -84,7 +86,7 @@ public class CadastroCliente extends Activity{
                         .setContentText("deuBoa");
                 NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
                 notificationManager.notify(1,noBuilder.build());
-
+                finish();
 
             }else{
                 Toast.makeText(getApplicationContext(), "cadCliente algo deu errado", Toast.LENGTH_LONG).show();
@@ -105,6 +107,14 @@ public class CadastroCliente extends Activity{
 
         }
         };
+
+    View.OnClickListener cancelarCliente = new View.OnClickListener() {
+
+        @Override
+        public void onClick(View v) {
+            finish();
+        }
+    };
 
     View.OnClickListener atualizar = new View.OnClickListener() {
 
@@ -132,11 +142,21 @@ public class CadastroCliente extends Activity{
             String having = null;
             String orderBy = Banco.TBCliente._ID + " ASC";
             Cursor cursor =  db.query(Banco.TBCliente.TABLE,columns,selection,selectionArgs,groupBy,having,orderBy);
-            while(cursor.moveToNext()){
-                cursor.getString(cursor.getColumnIndex(Banco.TBCliente.NOME));
-                cursor.getString(cursor.getColumnIndex(Banco.TBCliente.EMAIL));
+
+            try {
+                while(cursor.moveToNext()){
+                    cursor.getString(cursor.getColumnIndex(Banco.TBCliente.NOME));
+                    cursor.getString(cursor.getColumnIndex(Banco.TBCliente.EMAIL));
+                }
+            }finally {
+                db.close();
             }
 
+//            while(cursor.moveToNext()){
+//                cursor.getString(cursor.getColumnIndex(Banco.TBCliente.NOME));
+//                cursor.getString(cursor.getColumnIndex(Banco.TBCliente.EMAIL));
+//            }
+//            db.close();
         }
     };
 
