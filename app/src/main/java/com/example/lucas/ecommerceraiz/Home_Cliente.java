@@ -30,9 +30,16 @@ public class Home_Cliente extends Activity{
 
         bTCadastrar.setOnClickListener(novoCadCliente);
 
-
+        btLogin.setOnClickListener(login);
     }
+    View.OnClickListener login = new View.OnClickListener() {
 
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+            startActivity(intent);
+        }
+    };
     View.OnClickListener novoCadCliente = new View.OnClickListener() {
         @Override
         public void onClick(View v) {

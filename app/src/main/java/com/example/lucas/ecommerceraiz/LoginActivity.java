@@ -2,6 +2,7 @@ package com.example.lucas.ecommerceraiz;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -28,8 +29,8 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         btLogin = (Button) findViewById(R.id.btnLogin);
         btLogin.setOnClickListener(doLogin);
-        listaUsers = new ArrayList<Usuario>();
-        initializeArrayUsers();
+        //listaUsers = new ArrayList<Usuario>();
+        //initializeArrayUsers();
         context = this;
 
     }
@@ -42,8 +43,20 @@ public class LoginActivity extends AppCompatActivity {
             boolean loginOK;
             boolean passOK;
 
-            Intent intent;
-            for(Usuario user : listaUsers){
+            Toast.makeText(getApplicationContext(),"teste botao", Toast.LENGTH_LONG).show();
+
+            CadastroCliente cadastroCliente = new CadastroCliente();
+
+            Cursor cursor = cadastroCliente.carregaDadoByEmail(login.getText().toString());
+            if(!cursor.isNull(cursor.getColumnIndex(Banco.TBCliente.EMAIL))){
+
+                Toast.makeText(getApplicationContext(),"login deu boa", Toast.LENGTH_LONG).show();
+                intent = new Intent(getApplicationContext(), Home_Cliente.class);
+                intent.putExtra("DADOS", cursor.getString(cursor.getColumnIndex(Banco.TBCliente.NOME)));
+            }else{
+                Toast.makeText(getApplicationContext(),"Algo deu errado", Toast.LENGTH_LONG).show();
+            }
+          /*  for(Usuario user : listaUsers){
                 Log.d("usuario", user.toString());
                 loginOK = validaUsuario(user);
                 passOK = validaSenha(user);
@@ -65,7 +78,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
 
 
-            }
+            }*/
         }
 
 
